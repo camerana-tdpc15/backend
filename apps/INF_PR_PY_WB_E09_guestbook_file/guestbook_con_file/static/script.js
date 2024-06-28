@@ -1,7 +1,11 @@
 // Quando il DOM è pronto, legge e mostra i messaggi.
 // Questo serve perchè altrimenti all'apertura, la pagina non verrebbe
 // popolata automaticamente con i messaggi.
-document.addEventListener('DOMContentLoaded', () => {
+// NOTA: DOMContentLoaded è l'evento che viene innescato quando la pagina
+//       completamente caricata (il DOM è l'ambiente di esecuzione
+//       in cui c'è tutto il contenuto, html, js, css...)
+
+function avviaApp() {
     // Legge e mostra i messaggi nell'elenco
     getMessages();
 
@@ -9,7 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // dovuto usare addEventListener per intercettare l'evento click sul bottone
     // e chiamare la funzione sendMessage:
     // document.getElementById('submit-btn').addEventListener('click', sendMessage);
-});
+}
+
+document.addEventListener('DOMContentLoaded', avviaApp);
 
 /*  Funzione per recuperare i messaggi dal server con metodo GET e fetch API
     e poi aggiornare la lista dei messaggi.
@@ -36,12 +42,17 @@ function getMessages() {
             messageList.innerHTML += `<li>${msg}</li>`;
         });
 
-        // Da manuale, avremmo potuto fare anche così:
-        // messages.forEach(msg => {
-        //     const li = document.createElement('li');
-        //     li.textContent = msg;
-        //     messageList.appendChild(li);
-        // });
+        // for (let msg of messages) {
+        //     messageList.innerHTML += `<li>${msg}</li>`;
+        // }
+
+        // Da manuale, avremmo potuto fare anche così, perché è
+        // meno oneroso in termini di carico computazionale
+        messages.forEach(msg => {
+            const li = document.createElement('li');
+            li.textContent = msg;
+            messageList.appendChild(li);
+        });
 
     })
     .catch(error => console.error('Error:', error));
