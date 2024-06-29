@@ -1,11 +1,11 @@
 import os
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, url_for
 from markupsafe import escape
 
 BASE_DIR_PATH = os.path.abspath(os.path.dirname(__file__))
 GB_FILE_PATH = os.path.join(BASE_DIR_PATH, 'guestbook.txt')
 
-app = Flask(__name__)
+app = Flask(__name__, )
 
 app.secret_key = 'supersecretkey'  # Necessario per i flash messages
 
