@@ -3,10 +3,13 @@ from flask import Flask, render_template, request, session, redirect, flash, url
 from flask_sqlalchemy import SQLAlchemy
 from markupsafe import escape
 
-BASE_DIR_PATH = os.path.abspath(os.path.dirname(__file__))
+app = Flask(__name__)
+
+# BASE_DIR_PATH = os.path.dirname(os.path.abspath(__file__)) # app.root_path
+# BASE_DIR_PATH = os.path.abspath(os.path.dirname(__file__)) # io
+BASE_DIR_PATH = app.root_path
 DATABASE_PATH = os.path.join(BASE_DIR_PATH, 'db.sqlite3')
 
-app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+DATABASE_PATH
 app.config['SECRET_KEY'] = 'mysecretkey'
 db = SQLAlchemy(app)
